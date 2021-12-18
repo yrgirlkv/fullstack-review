@@ -16,13 +16,13 @@ let save = (repoInfo) => {
   // This function should save a repo or repos to
   // the MongoDB
   const repo = new Repo(repoInfo);
-  repo.save((err) => {
-    if (err) {
-      console.error(err);
-    }
+  repo.save()
+  .then(res => console.log(`successfully saved ${res.id} to database`))
+  .catch(err => {
+    err.code === 11000 ?
+    console.log(`duplicate repo @ id ${err.keyValue.id} skipped`)
+    : console.error(err)
   });
-  console.log('successfully saved the following to db: ')
-  console.log(repo);
 }
 
 module.exports.save = save;
