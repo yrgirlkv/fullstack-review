@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const { getReposByUsername } = require('../helpers/github.js')
+const db = require('../database/index.js')
 let app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -23,7 +24,7 @@ app.post('/repos', function (req, res) {
       watchers_count: repo.watchers_count
     })
   ))
-  .then(res => console.log(res));
+  .then(res => res.forEach(repo => db.save(repo)));
 
 });
 
