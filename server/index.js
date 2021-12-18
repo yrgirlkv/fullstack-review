@@ -24,7 +24,6 @@ app.post('/repos', function (req, res) {
     })
   ))
   .then(res => console.log(res));
-  // .then(res => console.log(res));
 
 });
 
