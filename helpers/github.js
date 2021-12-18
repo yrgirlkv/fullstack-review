@@ -5,7 +5,7 @@ let getReposByUsername = (username) => {
   // TODO - Use the axios module to request repos for a specific
   // user from the github API
   let options = {
-    url: `https://api.github.com/users/${username}`,
+    url: `https://api.github.com/users/${username}/repos`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`
