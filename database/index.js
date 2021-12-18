@@ -16,7 +16,11 @@ let save = (repoInfo) => {
   // This function should save a repo or repos to
   // the MongoDB
   const repo = new Repo(repoInfo);
-  repo.save();
+  repo.save((err) => {
+    if (err) {
+      console.error(err);
+    }
+  });
   console.log('successfully saved the following to db: ')
   console.log(repo);
 }
