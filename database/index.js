@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect('mongodb://localhost/fetcher', {useNewUrlParser: true, useUnifiedTopology: true});
 
 let repoSchema = mongoose.Schema({
   id: {type: 'Number', unique: true},
@@ -17,6 +17,8 @@ let save = (repoInfo) => {
   // the MongoDB
   const repo = new Repo(repoInfo);
   repo.save();
+  console.log('successfully saved the following to db: ')
+  console.log(repo);
 }
 
 module.exports.save = save;
