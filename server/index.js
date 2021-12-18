@@ -14,7 +14,17 @@ app.post('/repos', function (req, res) {
   console.log(`received ${req.body} from POST`);
   res.send('POST request received');
   getReposByUsername(req.body)
-  .then(res => console.log(res.data));
+  .then(res => res.data.map(
+    repo => ({
+      id: repo.id,
+      name: repo.name,
+      owner: repo.owner.login,
+      full_name: repo.full_name,
+      watchers_count: repo.watchers_count
+    })
+  ))
+  .then(res => console.log(res));
+  // .then(res => console.log(res));
 
 });
 
