@@ -19,7 +19,6 @@ class App extends React.Component {
     $.ajax(this.state.url, {
       contentType: 'text/plain',
       data: term,
-      dataType: 'text',
       method: 'POST'
     })
   }
