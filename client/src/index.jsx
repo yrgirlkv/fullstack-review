@@ -9,7 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       url: `http://localhost:1128/repos`,
-      repos: []
+      repos: [],
     }
 
     this.fetch = this.fetch.bind(this);
@@ -24,7 +24,13 @@ class App extends React.Component {
     $.ajax(this.state.url, {
       contentType: 'text/plain',
       data: term,
-      method: 'POST'
+      method: 'POST',
+      success: () => {
+        this.fetch();
+      },
+      error: (err) => {
+        console.error(err);
+      }
     })
   }
 
