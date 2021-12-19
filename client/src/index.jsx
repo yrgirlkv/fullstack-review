@@ -12,6 +12,11 @@ class App extends React.Component {
       repos: []
     }
 
+    this.fetch = this.fetch.bind(this);
+  }
+
+  componentDidMount () {
+    this.fetch();
   }
 
   search (term) {
@@ -23,10 +28,21 @@ class App extends React.Component {
     })
   }
 
+  fetch () {
+    console.log('fetching repos...');
+    $.ajax(this.state.url, {
+      contentType: 'application/json',
+      method: 'GET',
+      success: (data) => {
+        this.setState({repos: data})
+      }
+    })
+  }
+
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      <RepoList repos={this.state.repos} fetch={this.state.fetch}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)
   }
