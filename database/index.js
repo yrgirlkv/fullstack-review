@@ -22,4 +22,11 @@ let save = (repoInfo) => {
   });
 }
 
-module.exports.save = save;
+let produce = () => {
+  return Repo.find();
+}
+
+module.exports = {
+  save: save,
+  produce: produce
+}

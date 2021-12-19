@@ -27,6 +27,16 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  db.produce()
+  .then(repos => {
+    console.log('got repos');
+    return repos;
+  })
+  .then(repos =>
+    repos.sort((first, second) => first.watchers_count < second.watchers_count ? 1 : -1)
+  )
+  .then(repos => repos.slice(0, 25))
+  .then(repos => res.json(repos));
 });
 
 let port = 1128;
